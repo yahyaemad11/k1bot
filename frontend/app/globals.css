@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: dark; }
+html, body { background: #06030d; color: #ede9fe; }
+
+/* Ambient violet glow + subtle halftone, evoking the K1 logo. */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background:
+    radial-gradient(ellipse at 15% -10%, rgba(168,85,247,0.18), transparent 55%),
+    radial-gradient(ellipse at 85% 110%, rgba(124,58,237,0.14), transparent 55%),
+    radial-gradient(ellipse at 50% 50%, rgba(109,40,217,0.05), transparent 70%);
+  pointer-events: none; z-index: -2;
+}
+body::after {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: radial-gradient(circle, rgba(168,85,247,0.12) 1px, transparent 1.4px);
+  background-size: 22px 22px;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+  opacity: 0.55;
+  pointer-events: none; z-index: -1;
+}
+
+@layer components {
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 font-medium transition-all duration-200 active:scale-[0.97]; }
+  .btn-primary {
+    @apply btn text-white border border-accent3/30 shadow-glow-sm hover:shadow-glow disabled:opacity-60 disabled:cursor-not-allowed;
+    background: linear-gradient(135deg, #a855f7 0%, #7c3aed 100%);
+  }
+  .btn-primary:hover { background: linear-gradient(135deg, #b266fc 0%, #8b3def 100%); }
+  .btn-ghost { @apply btn border border-border bg-panel2/50 text-gray-200 hover:border-accent/50 hover:bg-panel2 hover:text-white; }
+  .btn-danger { @apply btn border border-red-500/40 bg-red-500/5 text-red-400 hover:bg-red-500/15 hover:border-red-500/60; }
+  .card {
+    @apply relative rounded-2xl border border-border/80 bg-panel/70 backdrop-blur-md p-5 shadow-xl shadow-black/40;
+  }
+  .card::before {
+    content: '';
+    position: absolute; inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(168,85,247,0.4), transparent 40%, transparent 60%, rgba(168,85,247,0.2));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    pointer-events: none;
+    opacity: 0.6;
+  }
+  .input {
+    @apply w-full rounded-xl border border-border bg-panel2/70 px-3 py-2 text-sm outline-none transition
+      focus:border-accent focus:ring-2 focus:ring-accent/30 focus:bg-panel2 placeholder:text-muted/60;
+  }
+  .label { @apply block text-xs font-medium text-muted mb-1.5; }
+  .badge { @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium; }
+  .section-title {
+    @apply text-lg font-bold;
+    background: linear-gradient(135deg, #fff 0%, #c084fc 100%);
+    -webkit-background-clip: text;
+            background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .glow-text {
+    text-shadow: 0 0 20px rgba(168,85,247,0.5);
+  }
+  .neon-border {
+    border: 1px solid rgba(168,85,247,0.3);
+    box-shadow:
+      0 0 0 1px rgba(168,85,247,0.1) inset,
+      0 0 20px -5px rgba(168,85,247,0.4);
+  }
+}
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb { background: #2a1d44; border-radius: 8px; }
+::-webkit-scrollbar-thumb:hover { background: #3d2a5e; }
+::-webkit-scrollbar-track { background: transparent; }
+
+/* Selection */
+::selection { background: rgba(168,85,247,0.35); color: #fff; }
+
+/* Fix flip of lucide icons in RTL where direction matters */
+[dir="rtl"] .flip-rtl { transform: scaleX(-1); }
+
+.fade-in { animation: fadeIn 0.4s ease-out; }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}

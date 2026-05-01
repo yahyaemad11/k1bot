@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#1a0a2e"/>
+      <stop offset="100%" stop-color="#000"/>
+    </radialGradient>
+    <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#c084fc"/>
+      <stop offset="50%" stop-color="#7c3aed"/>
+      <stop offset="100%" stop-color="#4c1d95"/>
+    </linearGradient>
+    <linearGradient id="textGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f3e8ff"/>
+      <stop offset="40%" stop-color="#c084fc"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <pattern id="dots" x="0" y="0" width="6" height="6" patternUnits="userSpaceOnUse">
+      <circle cx="3" cy="3" r="1.1" fill="#a855f7"/>
+    </pattern>
+    <mask id="halftoneMask">
+      <rect width="200" height="200" fill="black"/>
+      <path d="M 100 100 m -86 0 a 86 86 0 0 0 30 65 l 8 -16 a 68 68 0 0 1 -22 -49 z" fill="white"/>
+      <path d="M 100 100 m 86 0 a 86 86 0 0 1 -30 65 l -8 -16 a 68 68 0 0 0 22 -49 z" fill="white"/>
+    </mask>
+  </defs>
+
+  <!-- Background -->
+  <rect width="200" height="200" fill="url(#bg)" rx="30"/>
+
+  <!-- Halftone dots arc -->
+  <rect width="200" height="200" fill="url(#dots)" mask="url(#halftoneMask)" opacity="0.85"/>
+
+  <!-- Outer violet ring -->
+  <circle cx="100" cy="100" r="84" fill="none" stroke="url(#ringGrad)" stroke-width="3" opacity="0.85" filter="url(#glow)"/>
+  <circle cx="100" cy="100" r="78" fill="none" stroke="#a855f7" stroke-width="1" opacity="0.4"/>
+
+  <!-- K1 text (faceted look) -->
+  <g filter="url(#glow)">
+    <text x="100" y="128"
+          font-family="Impact, 'Arial Black', sans-serif"
+          font-weight="900"
+          font-size="92"
+          text-anchor="middle"
+          fill="url(#textGrad)"
+          stroke="#4c1d95"
+          stroke-width="1.5"
+          letter-spacing="-3">K1</text>
+  </g>
+
+  <!-- Highlight overlay on text (subtle gloss) -->
+  <text x="100" y="128"
+        font-family="Impact, 'Arial Black', sans-serif"
+        font-weight="900"
+        font-size="92"
+        text-anchor="middle"
+        fill="#fff"
+        opacity="0.18"
+        letter-spacing="-3">K1</text>
+</svg>
