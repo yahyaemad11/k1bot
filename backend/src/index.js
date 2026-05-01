@@ -63,8 +63,10 @@ io.on('connection', (socket) => {
   socket.emit('hello', { ok: true });
 });
 
-server.listen(config.port, () => {
-  console.log(`[KeyOne] API listening on :${config.port}`);
+const PORT = process.env.PORT || config.port || 4000;
+
+server.listen(PORT, "0.0.0.0", () => {
+  console.log(`[KeyOne] API listening on :${PORT}`);
   startWhatsApp(io).catch((e) => {
     console.error('[KeyOne] WhatsApp startup error:', e);
   });
